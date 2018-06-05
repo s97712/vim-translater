@@ -1,4 +1,4 @@
-let s:translator_file = expand('<sfile>:p:h') . "/../Untitled.py"
+let s:translator_file = expand('<sfile>:p:h') . "/../yd.py"
 let s:translator = {'stdout_buffered': v:true, 'stderr_buffered': v:true}
 
 function! s:translator.on_stdout(jobid, data, event)

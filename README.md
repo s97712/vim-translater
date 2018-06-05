@@ -14,6 +14,21 @@ vim youdao translater 是一个利用 [有道词典在线版](http://dict.youdao
 	cd ~/.vim/bundle
 	git clone git@github.com:ianva/vim-youdao-translater.git
 
+### Vundle 安装:
+  编辑 ~/.vimrc
+  ```vim
+    call vundle#begin()
+    ...
+    ...
+    + Plugin 's97712/vim-youdao-translater'
+    call vundle#end()
+  ```
+  运行vim命令
+  ```
+    :w
+    :source %
+    :PluginInstall
+  ```
 
 ###  其他
 添加 `~/.vimrc` 文件：
