@@ -19,7 +19,7 @@ function! s:translator.start(lines)
     elseif exists('*job_start') && ! has("gui_macvim")
         return job_start(cmd, {'out_cb': "ydt#VimOutCallback"})
     else
-        echo system(cmd)
+        balloon_show(system(cmd))
     endif
 endfunction
 
