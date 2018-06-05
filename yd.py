@@ -1,10 +1,8 @@
 
 # coding: utf-8
 
-# In[13]:
+# In[4]:
 
-
-import sys
 
 from urllib.parse import urlencode
 from urllib.request import Request, urlopen
@@ -49,18 +47,41 @@ def youdao_trans(text):
             'User-Agent':'Mozilla/4.0 (compatible; MSIE 9.0; Windows NT 6.1)',
             'Cookie': 'YOUDAO_MOBILE_ACCESS_TYPE=1; OUTFOX_SEARCH_USER_ID=-123456789@0.0.0.0'
         });
-    except Error:
+    except Exception:
         return "翻译失败，网络异常"
 
     try:
-        return json['translateResult'][0][0]['tgt']
-    except Error:
+        return handleResult(json)
+    except Exception as e:
+        raise e
         return "翻译失败，API异常"
 
-def main(argv):
-    info = youdao_trans((' '.join(argv[1:])))
-    sys.stdout.write(info)
+def handleResult(res):
+    res = res['translateResult'];
+    res = list(map(lambda line:list(map(lambda block:block['tgt'],line)), res))
+    res = list(map(lambda line:' '.join(line), res))
+    res = '\n'.join(res);
+    return res;
     
+def main(text):
+    info = youdao_trans(text)
+    sys.stdout.write(info)
+
+
+import os
+import sys
+
 if __name__ == "__main__":
-    main(sys.argv);
+    if os.environ['_'].endswith('ipython'):
+        text = "Email verification helps our support team verify ownership if you lose account access and allows you to receive all the notifications you ask for."
+        text = text + "\n Email verification helps our support team verify ownership if you lose account access and allows you to receive all the notifications you ask for."
+    else:
+        text = ' '.join(sys.argv[1:])
+    main(text);
+
+
+# In[ ]:
+
+
+
 
