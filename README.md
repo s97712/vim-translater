@@ -31,25 +31,21 @@ vim youdao translater 是一个利用 [有道词典在线版](http://dict.youdao
   ```
 
 ###  其他
-添加 `~/.vimrc` 文件：
+编辑 `~/.vimrc` 文件：
 
 ```vim
-vnoremap <silent> <C-T> :<C-u>Ydv<CR>
-nnoremap <silent> <C-T> :<C-u>Ydc<CR>
-noremap <leader>yd :<C-u>Yde<CR>
+nmap <leader>t :Ydc<CR>
+#翻译光标在在文字
+nmap <leader>T :Ydcline<CR>
+#翻译光标所在行
 ```
 
 ## 如何使用
 
-在普通模式下，按 `ctrl+t`， 会翻译当前光标下的单词；
-
-在 `visual` 模式下选中单词或语句，按 `ctrl+t`，会翻译选择的单词或语句；
-
-点击引导键再点y，d，可以在命令行输入要翻译的单词或语句；
+引导键+t 翻译光标所在文字
+引导键+T 翻译光标所在行
 
 译文将会在编辑器底部的命令栏显示。
-
-
 
 ## License
 
