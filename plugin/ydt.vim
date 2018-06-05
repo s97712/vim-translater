@@ -30,6 +30,9 @@ endfunction
 function! s:YoudaoCursorTranslate()
     call s:translator.start(expand("<cword>"))
 endfunction
+function! s:YoudaoCursorTranslateLine()
+    call s:translator.start(getline("."))
+endfunction
 
 function! s:YoudaoEnterTranslate()
     let word = input("Please enter the word: ")
@@ -38,5 +41,6 @@ function! s:YoudaoEnterTranslate()
 endfunction
 
 command! Ydv call <SID>YoudaoVisualTranslate()
-command! Ydc call <SID>YoudaoCursorTranslate()
 command! Yde call <SID>YoudaoEnterTranslate()
+command! Ydc call <SID>YoudaoCursorTranslate()
+command! Ydcline call <SID>YoudaoCursorTranslateLine()
