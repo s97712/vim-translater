@@ -17,7 +17,7 @@ function! s:translator.start(lines, multiline)
     if exists('*jobstart')
         return jobstart(cmd, self)
     elseif exists('*job_start') && ! has("gui_macvim")
-        if g:multiline
+        if a:multiline
           echo "\n"
         endif
         return job_start(cmd, {'out_cb': "ydt#VimOutCallback"})
