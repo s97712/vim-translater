@@ -6,7 +6,7 @@ function! s:translator.on_stdout(jobid, data, event)
 endfunction
 let s:translator.on_stderr = function(s:translator.on_stdout)
 
-function! s:translator.start(lines)
+function! s:translator.start(lines, multiline)
     let python_cmd = ydt#GetAvailablePythonCmd()
     if empty(python_cmd)
         echoerr "[YouDaoTranslator] [Error]: Python package neeeds to be installed!"
@@ -17,6 +17,9 @@ function! s:translator.start(lines)
     if exists('*jobstart')
         return jobstart(cmd, self)
     elseif exists('*job_start') && ! has("gui_macvim")
+        if multiline
+          echo "\n"
+        endif
         return job_start(cmd, {'out_cb': "ydt#VimOutCallback"})
     else
         echo system(cmd)
@@ -24,20 +27,20 @@ function! s:translator.start(lines)
 endfunction
 
 function! s:YoudaoVisualTranslate()
-    call s:translator.start(ydt#GetVisualSelection())
+    call s:translator.start(ydt#GetVisualSelection(), 1)
 endfunction
 
 function! s:YoudaoCursorTranslate()
-    call s:translator.start(expand("<cword>"))
+    call s:translator.start(expand("<cword>"), 0)
 endfunction
 function! s:YoudaoCursorTranslateLine()
-    call s:translator.start(getline("."))
+    call s:translator.start(getline("."), 1)
 endfunction
 
 function! s:YoudaoEnterTranslate()
     let word = input("Please enter the word: ")
     redraw!
-    call s:translator.start(word)
+    call s:translator.start(word, 0)
 endfunction
 
 command! Ydv call <SID>YoudaoVisualTranslate()
