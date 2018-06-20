@@ -47,6 +47,10 @@ nmap <leader>T :Ydcline<CR>
 
 译文将会在编辑器底部的命令栏显示。
 
+## TODOS
+- [ ] 翻译选择文本
+- [ ] 增加google翻译
+
 ## License
 
 The MIT License (MIT)
