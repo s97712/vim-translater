@@ -26,24 +26,20 @@ function! s:translator.start(lines, multiline)
     endif
 endfunction
 
-function! s:YoudaoVisualTranslate()
-    call s:translator.start(ydt#GetVisualSelection(), 0)
-endfunction
-
-function! s:YoudaoCursorTranslate()
-    call s:translator.start(expand("<cword>"), 0)
-endfunction
-function! s:YoudaoCursorTranslateLine()
-    call s:translator.start(getline("."), 1)
-endfunction
-
 function! s:YoudaoEnterTranslate()
     let word = input("Please enter the word: ")
     redraw!
     call s:translator.start(word, 0)
 endfunction
 
-command! Ydv call <SID>YoudaoVisualTranslate()
+
 command! Yde call <SID>YoudaoEnterTranslate()
-command! Ydc call <SID>YoudaoCursorTranslate()
-command! Ydcline call <SID>YoudaoCursorTranslateLine()
+
+command! Ydc :Ydcword<CR>
+command! Ydv :Ydvword<CR>
+
+command! Ydcword call s:translator.start(expand("<cword>"), 0)
+command! Ydcline call s:translator.start(getline("."), 1)
+
+command! Ydvword call s:translator.start(ydt#GetVisualSelection(), 1)
+command! Ydvline call s:translator.start(ydt#GetVisualSelection(), 0)
