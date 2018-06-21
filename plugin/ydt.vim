@@ -35,8 +35,8 @@ endfunction
 
 command! Yde call <SID>YoudaoEnterTranslate()
 
-command! Ydc :Ydcword<CR>
-command! Ydv :Ydvword<CR>
+command! Ydc :Ydcword
+command! Ydv :Ydvword
 
 command! Ydcword call s:translator.start(expand("<cword>"), 0)
 command! Ydcline call s:translator.start(getline("."), 1)
