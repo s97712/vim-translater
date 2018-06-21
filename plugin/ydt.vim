@@ -27,7 +27,7 @@ function! s:translator.start(lines, multiline)
 endfunction
 
 function! s:YoudaoVisualTranslate()
-    call s:translator.start(ydt#GetVisualSelection(), 1)
+    call s:translator.start(ydt#GetVisualSelection(), 0)
 endfunction
 
 function! s:YoudaoCursorTranslate()
